@@ -1,0 +1,217 @@
+{% extends 'main.html' %}{% load static %}{% block content %}
+			<!-- start banner Area -->
+			<section class="banner-area relative about-banner" id="home">	
+				<div class="overlay overlay-bg"></div>
+				<div class="container">				
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+								Biz haqimizda				
+							</h1>	
+							<p class="text-white link-nav"><a href="{% url 'home' %}">Bosh sahifa </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{% url 'about' %}"> Biz haqimizda</a></p>
+						</div>	
+					</div>
+				</div>
+			</section>
+			<!-- End banner Area -->	
+
+			<!-- Start feature Area -->
+			<section class="feature-area pb-120">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="single-feature">
+								<div class="title">
+									<h4>Biz bilan kelajak sari</h4>
+								</div>
+								<div class="desc-wrap">
+									<p>
+										Odam mashg‘ulot zallarida chempion bo'lmaydi. Chempion bo'lish uchun
+ishni ruhiyatdan boshlash kerak - istak, orzu va o'z g‘alabasini aniq-tiniq his
+qilishgina kishini maqsadiga eltadi
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="single-feature">
+								<div class="title">
+									<h4>№1 IT akademiya</h4>
+								</div>
+								<div class="desc-wrap">
+									<p>
+										Buyuk muvaffaqiyatlar qat'iyat va qunt-matonatning natijasi, xolos.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="single-feature">
+								<div class="title">
+									<h4>Zamonaviy kasblar markazi</h4>
+								</div>
+								<div class="desc-wrap">
+									<p>
+										Butun umringiz davomida orzungizga intiling va vaqtingizni behuda sarlamang. Chunki havoga uchgan vaqt sizdagi barcha yaxshi narsalarni tortib oladi
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End feature Area -->
+
+			<!-- Start info Area -->
+			<section class="info-area pb-120">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-lg-6 no-padding info-area-left">
+							<img class="img-fluid" src="{% static 'img/about-img.jpg' %}" alt="">
+						</div>
+						<div class="col-lg-6 info-area-right">
+							<h1>Nega aynan biz</h1>
+							<p>
+								IT sohasidagi yangi ko'nikmalarni o'zlashtirishni, malaka oshirishni va ko'proq pul ishlashni xohlaysanmi? Biz senga yordam beramiz! Bizning malakali o'qituvchilarimiz senga axborot texnologiyalarining barcha tendentsiyalari to'g'risida ma'lumot va ko'nikmalar beradilar. Biz bilan sen eng zamonaviy darsliklardan foydalangan holda IT-bilimlarga ega bo'lasan. Marhamat, quyida keltirilgan, bugungi kundagi eng mashhur IT yo'nalishlardan birini tanla va hayotingni hoziroq yaxshi tarafga bur!
+							</p>
+						</div>
+					</div>
+				</div>	
+			</section>
+			<!-- End info Area -->	
+
+			<!-- Start course-mission Area -->
+			<section class="course-mission-area pb-120">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">Sening IT`dagi muvaffaqqiyatlaring shu yerdan boshlanadi!</h1>
+								<p>Yo‘qotuvchi kimligini bilasizmi? Haqiqiy yutqazgan odam yo'qotishdan shunchalik qo'rqadiki, u hech qachon sinab ko'rishga jur'at etmaydi</p>
+							</div>
+						</div>
+					</div>							
+                    <div class="row">
+                        <div class="col-md-6 accordion-left">
+
+                            <!-- accordion 2 start-->
+                            <dl class="accordion">
+								{% for i in about_info_tab %}
+                                <dt><a href="">{{i.title}}</a> </dt>
+                                <dd>{{i.content}} </dd>
+								{% endfor %}
+                            </dl>
+                            <!-- accordion 2 end-->
+                        </div>
+                        <div class="col-md-6 video-right justify-content-center align-items-center d-flex relative">
+                        	<div class="overlay overlay-bg"></div>
+							<a class="play-btn" href="https://www.youtube.com/watch?v=ARA0AxrnHdM"><img class="img-fluid mx-auto" src="{% static 'img/play.png' %}" alt=""></a>
+                        </div>
+                    </div>
+				</div>	
+			</section>
+			<!-- End course-mission Area -->
+					
+
+			<!-- Start search-course Area -->
+			<section class="search-course-area relative">
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row justify-content-between align-items-center">
+						<div class="col-lg-6 col-md-6 search-course-left">
+							<h1 class="text-white">
+								Bizda albatta to'lov uchun <br>
+								qaynoq chegirmalar mavjud
+							</h1>
+							<p class="text-white">
+								O'zingiz bilan 5+ do'stingizni o'quv markazimizga o'qishga taklif qiling va har bir kurs uchun maxsus chegirmani qo'lga kiriting
+							</p>
+							<div class="row details-content">
+								<div class="col single-detials">
+									<span class="lnr lnr-graduation-hat"></span>
+									<a href="#"><h4>Mutaxassis murabbiylar</h4></a>
+									<p>
+										Muvaffaqiyatni taqdirning sovg'asi sifatida qabul qiling, muvaffaqiyatsizlik esa harakat etishmasligi sifatida
+									</p>
+								</div>
+								<div class="col single-detials">
+									<span class="lnr lnr-license"></span>
+									<a href="#"><h4>Sertifikatlash</h4></a>
+									<p>
+										Agar siz urinib ko'rsangiz, sizda ikkita variant bor: muvaffaqiyatli yoki muvaffaqiyatsiz. Agar urinmasangiz, faqat bitta variant bor
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 search-course-right section-gap">
+							<form class="form-wrap" action="#" method="POST"> {% csrf_token %}
+								<h4 class="text-white pb-20 text-center mb-30">Bizning kurslarga yozilish</h4>
+								{% if msg_succses %}
+								<h6 style="color: #3ff" class="pb-20">Siz bizning kursga yozildingiz, tez orada administrator siz bilan bog'lanadi</h6>
+								{% endif %}
+								<input type="text" class="form-control" name="name" placeholder="FIO" onfocus="this.placeholder = ''" onblur="this.placeholder = 'FIO'" >
+								<input type="phone" class="form-control" name="phone" placeholder="Telefon raqamingiz" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Telefon raqamingiz'" >
+								<input type="email" class="form-control" name="email" placeholder="Email pochta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email pochta'" >
+								<div class="form-select" id="service-select">
+									<select name="course">
+										<option datd-display="">Kursni tanlang</option>
+										{% for c in courses %}
+										<option value="{{c.id}}">{{c.name}}</option>
+										{% endfor %}
+									</select>
+								</div>
+								<button class="primary-btn text-uppercase" type="submit">Yuborish</button>
+							</form>
+						</div>
+					</div>
+				</div>	
+			</section>
+			<!-- End search-course Area -->			
+
+			<!-- Start review Area -->
+			<section class="review-area section-gap relative">
+				<div class="overlay overlay-bg"></div>
+				<div class="container">				
+					<div class="row">
+						<div class="active-review-carusel">
+							{% for itm in about_us_comments %}
+							<div class="single-review item">
+								<div class="title justify-content-start d-flex">
+									<a href="#"><h4>{{itm.name}}</h4></a>
+									<div class="star">
+										<span class="fa fa-star {% if itm.star1 %}checked{% endif %}"></span>
+										<span class="fa fa-star {% if itm.star2 %}checked{% endif %}"></span>
+										<span class="fa fa-star {% if itm.star3 %}checked{% endif %}"></span>
+										<span class="fa fa-star {% if itm.star4 %}checked{% endif %}"></span>
+										<span class="fa fa-star {% if itm.star5 %}checked{% endif %}"></span>
+									</div>
+								</div>
+								<p>
+									{{itm.content}}
+								</p>
+							</div>	
+							{% endfor %}																									
+						</div>
+					</div>
+				</div>	
+			</section>
+			<!-- End review Area -->
+
+		{% endblock %}
+{% block script %}
+
+			<script src="js/vendor/jquery-2.2.4.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="js/vendor/bootstrap.min.js"></script>			
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+  			<script src="js/easing.min.js"></script>			
+			<script src="js/hoverIntent.js"></script>
+			<script src="js/superfish.min.js"></script>	
+			<script src="js/jquery.ajaxchimp.min.js"></script>
+			<script src="js/jquery.magnific-popup.min.js"></script>	
+    		<script src="js/jquery.tabs.min.js"></script>						
+			<script src="js/jquery.nice-select.min.js"></script>	
+			<script src="js/owl.carousel.min.js"></script>									
+			<script src="js/mail-script.js"></script>	
+			<script src="js/main.js"></script>	
+{% endblock %}

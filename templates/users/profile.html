@@ -1,0 +1,52 @@
+{% extends 'main.html' %}{% load static %}
+{% block head %}
+<title>Profil ma'lumotlari</title>
+<link rel="stylesheet" href="{% static 'styles/users/user_profile.css' %}">
+
+{% endblock %}
+{% block content %}
+<section class="banner-area relative about-banner" id="home">	
+    <div class="overlay overlay-bg"></div>
+    <div class="container">				
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Profil ma'lumotlari				
+                </h1>	
+                <p class="text-white link-nav"><a href="{% url 'home' %}">Bosh sahifa </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{% url 'profile' %}"> Profile</a></p>
+            </div>	
+        </div>
+    </div>
+</section>
+<br>
+<div  class="profile" style="margin: 0 10vw 10vw 10vw">
+    <div class="img">
+        <img src="{{ request.user.picture.url }}" width="100" alt="">
+    </div>
+    <div class="info">
+        <div class="full_name">
+<p>{{ request.user.get_full_name }}</p>
+        </div>
+        <div class="edit">
+            <div class="change_img btn">
+                <form action="" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+                    <label class="">
+                        <input type="file" name="picture" multiple="" style="display: none;" accept=".png,.jpg" onchange="submit()">
+                        <i class="fa-solid fa-camera-rotate"></i>
+                    </label>
+                </form>
+            </div>
+            <div class="change_info">
+                <a href="{% url 'settings' %}" class="btn"><i class="fa-solid fa-pen"></i>  Tahrirlash</a>
+            </div>
+        </div>
+    </div>
+    <div class="info">
+        <p style="color: #181c51;">Email: <span>{{ request.user.email }}</span></p>
+        <p style="color: #181c51;">Manzil: <span>{{ request.user.location }}</span></p>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+
+{% endblock %}

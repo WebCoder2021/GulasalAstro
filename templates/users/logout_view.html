@@ -1,0 +1,29 @@
+{% extends 'main.html' %}{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/style.css' %}">
+{% endblock %}
+{% block content %}
+<section class="banner-area relative about-banner" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Chiqish
+                </h1>
+                <p class="text-white link-nav"><a href="{% url 'home' %}">Bosh sahifa </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{% url 'login' %}"> Kirish</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="logoutContainer" style="margin: 10vw; border-radius: 6px;">
+    <h1>Rostdan ham chiqishni xohlaysizmi?</h1>
+    <div class="buttons">
+        <a href="{% url 'logout' %}?logout=true"> <button class="btn btn-lg animated delay1 btn-dark btn-hover-dark me-4 mb-3 mb-sm-0" style="background-color: #ff5050; border-color: red">Chiqish</button></a>
+        <a href="{% url 'home' %}"><button class="btn btn-lg animated delay1 btn-dark btn-hover-dark me-4 mb-3 mb-sm-0">Bosh sahifaga qaytish</button></a>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+
+{% endblock %}

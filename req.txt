@@ -1,0 +1,8 @@
+asgiref
+Django
+django-ckeditor
+django-jazzmin
+django-js-asset
+Pillow
+psycopg2
+tzdata

@@ -1,0 +1,187 @@
+{% extends 'main.html' %}{% load static %}{% block head %}{% endblock %}{% block content %}
+			<!-- start banner Area -->
+			<section class="banner-area relative about-banner" id="home">	
+				<div class="overlay overlay-bg"></div>
+				<div class="container">				
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+								Bizning kurslar
+							</h1>	
+							<p class="text-white link-nav"><a href="{% url 'home' %}">Bosh sahifa </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{% url 'courses'%}"> Kurslar</a></p>
+						</div>	
+					</div>
+				</div>
+			</section>
+			<!-- End banner Area -->	
+
+			<!-- Start course-details Area -->
+			<section class="course-details-area pt-120">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8 left-contents">
+							<div class="main-image">
+								<img class="img-fluid" src="{{course.image.url}}" alt="">
+							</div>
+							<div class="jq-tab-wrapper" id="horizontalTab">
+	                            <div class="jq-tab-menu">
+	                                <div class="jq-tab-title active" data-tab="1">Kurs haqida qisqacha</div>
+	                                <div class="jq-tab-title" data-tab="2">Nega aynan biz</div>
+	                                <div class="jq-tab-title" data-tab="3">Kurs rejasi</div>
+	                                <div class="jq-tab-title" data-tab="4">Izohlar</div>
+	                                <div class="jq-tab-title" data-tab="5">Kurs jadvali</div>
+	                            </div>
+	                            <div class="jq-tab-content-wrapper">
+	                                <div class="jq-tab-content active" data-tab="1">
+	                                {{course.objective|safe}}
+									</div>
+	                                <div class="jq-tab-content" data-tab="2">
+										{{course.eligibility|safe}}
+									</div>
+	                                <div class="jq-tab-content" data-tab="3">
+										<ul class="course-list">
+											{% for out in course.course_outlines.all %}
+											<li class="justify-content-start d-flex">
+												<img src="{{out.image.url}}" alt="" style="width: 100px; height:100px; object-fit:cover; border-radius:6px;margin-right: 10px">
+												<div>
+													<h3>{{out.title}}</h3>
+												    <p>{{out.content}}</p>
+												</div>
+											</li>
+											{% endfor %}
+
+										</ul>
+	                                </div>
+	                                <div class="jq-tab-content comment-wrap" data-tab="4">
+						                <div class="comments-area">
+						                    <h4>{{course.comments.count}} Izohlar</h4>
+											{% for cm in course.comments.all %}
+						                    <div class="comment-list">
+						                        <div class="single-comment justify-content-between d-flex">
+						                            <div class="user justify-content-between d-flex">
+						                                <div class="thumb">
+						                                    <img src="{{cm.user.picture.url}}" alt="" style="width: 100px; height:100px; object-fit:cover; border-radius:6px;margin-right: 10px">
+						                                </div>
+						                                <div class="desc">
+						                                    <h5><a href="#">{{cm.user.get_full_name}}</a></h5>
+						                                    <p class="date">{{cm.date|date:'H:i d-m-Y'}}</p>
+						                                    <p class="comment">
+						                                        {{cm.content}}
+						                                    </p>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+											{% endfor %}
+						                </div>
+										{% if request.user.is_authenticated %}
+						                <div class="comment-form">
+						                    <h4>Izoh qoldirish</h4>
+						                    <form  method="POST"> {% csrf_token %}
+						                        <div class="form-group">
+						                            <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+						                        </div>
+						                        <button type="submit" class="genric-btn primary radius">Yuborish</button>
+						                    </form>
+						                </div>
+										{% endif %}
+	                                </div>
+	                                <div class="jq-tab-content" data-tab="5">
+	                                	<div class="section-top-border">
+											<h3 class="mb-30">Dars jadvali</h3>
+											<div class="progress-table-wrap">
+												<div class="progress-table" style="padding: 10px; min-width:max-content">
+													<div class="table-head">
+														<div class="country">Guruh</div>
+														<div class="country">Hafta kuni</div>
+														<div class="country">Vaqt</div>
+													</div>
+													{% for c in course.schedule %}
+													<div class="table-row">
+														<div class="country">{{c.group.name}}</div>
+														<div class="country"> {{c.week.name|title}}</div>
+														<div class="country">{{c.time|date:"H:i"}}</div>
+													</div>
+													{% endfor %}
+												</div>
+											</div>
+										</div>
+	                                </div>
+	                            </div>
+	                        </div>
+						</div>
+						<div class="col-lg-4 right-contents">
+							<ul>
+								<li>
+									<img src="{{course.trainer.image.url}}" alt="" style="width: 100%; object-fit:cover; border-radius:3px">
+									<p style="font-weight: 900;"> Mentor</p>
+									<span class="or">{{course.trainers.first.master.user.get_full_name}}</span>
+								</li>
+								<li>
+									<a class="justify-content-between d-flex" href="#">
+										<p>Kurs narxi </p>
+										<span>{{course.sale}}</span>
+									</a>
+								</li>
+							</ul>
+							<br><hr><br>
+							<div class="search-course-right">
+								<form class="form-wrap" action="#" method="POST"> {% csrf_token %}
+									<h4 class="text-center mb-30">Kursga yozilish uchun 👇🏻</h4>
+									{% if msg_succses %}
+									<h6 style="color: #3ff" class="pb-20">Siz bizning kursga yozildingiz, tez orada administrator siz bilan bog'lanadi</h6>
+									{% endif %}
+									<input type="text" class="form-control mb-30" name="name" placeholder="FIO" onfocus="this.placeholder = ''" onblur="this.placeholder = 'FIO'" >
+									<input type="phone" class="form-control mb-30" name="phone" placeholder="Telefon raqamingiz" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Telefon raqamingiz'" >
+									<input type="email" class="form-control mb-30" name="email" placeholder="Email pochta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email pochta'" >
+									<button class="primary-btn text-uppercase mb-30" type="submit">Kursga yozilish</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End course-details Area -->
+
+			<!-- Start popular-courses Area -->
+			<section class="popular-courses-area section-gap courses-page">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">Biz taklif qiladigan mashhur kurslar</h1>
+								<p>Agar siz hayotdagi maqsadingizni aniqlamagan bo'lsangiz, unda siz unga ega bo'lgan odam uchun ishlaysiz</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						{% for course in courses %}
+						<div class="single-popular-carusel col-lg-3 col-md-6">
+							<div class="thumb-wrap relative">
+								<div class="thumb relative">
+									<div class="overlay overlay-bg"></div>	
+									<img class="img-fluid" src="{{course.image.url}}" alt="">
+								</div>
+								<div class="meta d-flex justify-content-between">
+									<p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>{{course.comments.count}}</p>
+									<h4>{{course.sale}}</h4>
+								</div>
+							</div>
+							<div class="details">
+								<a href="{% url 'course_detail' course.slug %}">
+									<h4>
+										{{course.name}}
+									</h4>
+								</a>
+								<p>{{course.sub_title}}</p>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+					<div style="display: flex; justify-content:center"><a href="{% url 'courses' %}" class="primary-btn text-uppercase mx-auto">Barcha kurslarni ko'rish</a></div>
+				</div>	
+			</section>
+			<!-- End popular-courses Area -->
+			{% endblock %}
+			{% block script %}
+{% endblock %}

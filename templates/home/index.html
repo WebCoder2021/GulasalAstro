@@ -1,0 +1,277 @@
+{% extends 'main.html' %}{% load static %}{% block head %}{% endblock %}{% block content %}
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home">
+				<div class="overlay overlay-bg"></div>	
+				<div class="container">
+					<div class="row fullscreen d-flex align-items-center justify-content-between">
+						<div class="banner-content col-lg-9 col-md-12">
+							<h1 class="text-uppercase">
+								BIZ YAXSHI DUNYO UCHUN YAXSHI TA'LIMNI TA'MINLAYMIZ
+							</h1>
+							<p class="pt-10 pb-10">
+								O'zingiz orzu qilgan kishi bo'lishingiz uchun hech qachon kech emas
+							</p>
+							<a href="{% url 'courses' %}" class="primary-btn text-uppercase">Boshlash</a>
+						</div>
+				</div>
+			</section>
+			<!-- End banner Area -->
+
+			<!-- Start feature Area -->
+			<section class="feature-area">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="single-feature">
+								<div class="title">
+									<h4>Biz bilan kelajak sari</h4>
+								</div>
+								<div class="desc-wrap">
+									<p>
+										Odam mashg‘ulot zallarida chempion bo'lmaydi. Chempion bo'lish uchun
+ishni ruhiyatdan boshlash kerak - istak, orzu va o'z g‘alabasini aniq-tiniq his
+qilishgina kishini maqsadiga eltadi
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="single-feature">
+								<div class="title">
+									<h4>№1 IT akademiya</h4>
+								</div>
+								<div class="desc-wrap">
+									<p>
+										Buyuk muvaffaqiyatlar qat'iyat va qunt-matonatning natijasi, xolos.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="single-feature">
+								<div class="title">
+									<h4>Zamonaviy kasblar markazi</h4>
+								</div>
+								<div class="desc-wrap">
+									<p>
+										Butun umringiz davomida orzungizga intiling va vaqtingizni behuda sarlamang. Chunki havoga uchgan vaqt sizdagi barcha yaxshi narsalarni tortib oladi
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End feature Area -->
+			<!-- Start popular-course Area -->
+			<section class="popular-course-area section-gap">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">Biz taklif qiladigan mashhur kurslar</h1>
+								<p>Agar sen biror narsani o‘ylab topa olsang, uni bajarishga ham qodirsan.</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="active-popular-carusel">
+							{% for course in courses %}
+							<div class="single-popular-carusel">
+								<div class="thumb-wrap relative">
+									<div class="thumb relative">
+										<div class="overlay overlay-bg"></div>	
+										<img class="img-fluid" src="{{course.image.url}}" style="height:200px; object-fit:cover" alt="">
+									</div><br>
+									<div class="meta d-flex justify-content-between">
+										<!-- <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>{{course.comments.count}}</p>
+										<h4>{{course.sale}}</h4> -->
+									</div>
+								</div>
+								<div class="details">
+									<a href="{% url 'course_detail' course.slug %}">
+										<h4>
+											{{course.name}}
+										</h4>
+									</a>
+									<p>
+										{{course.sub_title}}
+									</p>
+								</div>
+							</div>	
+							{% endfor %}
+						</div>
+					</div>
+				</div>	
+			</section>
+			<!-- End popular-course Area -->
+
+			<!-- Start search-course Area -->
+			<section class="search-course-area relative">
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row justify-content-between align-items-center">
+						<div class="col-lg-6 col-md-6 search-course-left">
+							<h1 class="text-white">
+								Bizda albatta to'lov uchun <br>
+								qaynoq chegirmalar mavjud
+							</h1>
+							<p class="text-white">
+								O'zingiz bilan 5+ do'stingizni o'quv markazimizga o'qishga taklif qiling va har bir kurs uchun maxsus chegirmani qo'lga kiriting
+							</p>
+							<div class="row details-content">
+								<div class="col single-detials">
+									<span class="lnr lnr-graduation-hat"></span>
+									<a href="#"><h4>Mutaxassis murabbiylar</h4></a>
+									<p>
+										Muvaffaqiyatni taqdirning sovg'asi sifatida qabul qiling, muvaffaqiyatsizlik esa harakat etishmasligi sifatida
+									</p>
+								</div>
+								<div class="col single-detials">
+									<span class="lnr lnr-license"></span>
+									<a href="#"><h4>Sertifikatlash</h4></a>
+									<p>
+										Agar siz urinib ko'rsangiz, sizda ikkita variant bor: muvaffaqiyatli yoki muvaffaqiyatsiz. Agar urinmasangiz, faqat bitta variant bor
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 search-course-right section-gap">
+							<form class="form-wrap" action="#" method="POST"> {% csrf_token %}
+								<h4 class="text-white pb-20 text-center mb-30">Bizning kurslarga yozilish</h4>
+								{% if msg_succses %}
+								<h6 style="color: #3ff" class="pb-20">Siz bizning kursga yozildingiz, tez orada administrator siz bilan bog'lanadi</h6>
+								{% endif %}
+								<input type="text" class="form-control" name="name" placeholder="FIO" onfocus="this.placeholder = ''" onblur="this.placeholder = 'FIO'" >
+								<input type="phone" class="form-control" name="phone" placeholder="Telefon raqamingiz" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Telefon raqamingiz'" >
+								<input type="email" class="form-control" name="email" placeholder="Email pochta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email pochta'" >
+								<div class="form-select" id="service-select">
+									<select name="course">
+										<option datd-display="">Kursni tanlang</option>
+										{% for c in courses %}
+										<option value="{{c.id}}">{{c.name}}</option>
+										{% endfor %}
+									</select>
+								</div>
+								<button class="primary-btn text-uppercase" type="submit">Yuborish</button>
+							</form>
+						</div>
+					</div>
+				</div>	
+			</section>
+			<!-- End search-course Area -->
+			<!-- Start upcoming-event Area -->
+			<section class="upcoming-event-area section-gap">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">Akademiyamizdagi so'nggi yangiliklar</h1>
+								<p>Ishoning, qo'lingizdan keladi va yo'lning yarmi allaqachon o'tib ketgan</p>
+							</div>
+						</div>
+					</div>								
+					<div class="row">
+						<div class="active-upcoming-event-carusel">
+							{% for event in events %}
+							<div class="single-carusel row align-items-center">
+								<div class="col-12 col-md-6 thumb">
+									<img class="img-fluid" src="{{event.image.url}}" alt="">
+								</div>
+								<div class="detials col-12 col-md-6">
+									<p>{{event.created|date:'H:i d-m-Y'}}</p>
+									<a href="#"><h4>{{event.title}}</h4></a>
+									<p>
+										{{event.sub_title}}
+									</p>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>	
+			</section>
+			<!-- End upcoming-event Area -->
+			
+			<!-- Start cta-one Area -->
+			<section class="cta-one-area relative section-gap">
+				<div class="container">
+					<div class="overlay overlay-bg"></div>
+					<div class="row justify-content-center">
+						<div class="wrap">
+							<h1 class="text-white"></h1>
+							<p>
+								“Eng muhimi, muvaffaqiyatga erishish uchun hech bo'lmaganda biror narsa qilish va buni hozir qilishdir. Bu eng muhim sir - barcha soddaligiga qaramay. Har bir insonning ajoyib g'oyalari bor, lekin kamdan-kam hollarda kimdir ularni amalda qo'llash uchun hech narsa qilmaydi va hozir. Ertaga emas. Bir hafta ichida emas. Hozir"
+							</p>
+							<a class="primary-btn wh" href="{% url 'courses' %}">Bizning kurslarga yozilish</a>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End cta-one Area -->
+			<!-- Start upcoming-event Area -->
+			<section class="upcoming-event-area section-gap">
+			  <div class="container">
+				<div class="row d-flex justify-content-center">
+				  <div class="menu-content pb-70 col-lg-8">
+					<div class="title text-center">
+					  <h1 class="mb-10">Bizning tajribali mentorlarimiz</h1>
+					  <p>IT sohasidagi yangi ko'nikmalarni o'zlashtirishni, malaka oshirishni va ko'proq pul ishlashni xohlaysanmi? Biz senga yordam beramiz!</p>
+					</div>
+				  </div>
+				</div>
+				<div class="row">
+				  <div class="active-upcoming-event-carusel">
+					{% for ms in masters %}
+					<div class="single-carusel row align-items-center">
+					  <div class="col-12 col-md-6 thumb">
+						<img class="img-fluid" src="{{ms.image.url}}" alt="">
+					  </div>
+					  <div class="detials col-12 col-md-6">
+						<p>{{ms.user.email}}</p>
+						<a href="#"><h4>{{ms.user.get_full_name}}</h4></a>
+						<p>
+						  {{ms.content}}
+						</p>
+					  </div>
+					</div>
+					{% endfor %}
+				  </div>
+				</div>
+			  </div>
+			</section>
+			<!-- End upcoming-event Area -->
+			<!-- Start blog Area -->
+			<section class="blog-area section-gap" id="blog">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">Bizning blogimizdagi so'nggi maqolalar</h1>
+								<p>Faqat hech narsa qilmagan odam xato qilmaydi! Xato qilishdan qo'rqmang - xatolarni takrorlashdan qo'rqing</p>
+							</div>
+						</div>
+					</div>					
+					<div class="row">
+						{% for post in posts %}
+						<div class="col-lg-3 col-md-6 single-blog">
+							<div class="thumb">
+								<img class="img-fluid" src="{{post.image.url}}" alt="">
+							</div>
+							<p class="meta">{{post.created|date:'H:i d-m-Y'}}  | <a href="#">{{post.user.first_name}}</a></p>
+							<a href="{% url 'blog_detail' post.slug %}">
+								<h5>{{post.title}}</h5>
+							</a>
+							<p>
+								{{post.sub_title}}
+							</p>
+							<a href="{% url 'blog_detail' post.slug %}" class="details-btn d-flex justify-content-center align-items-center"><span class="details">Ko'proq</span><span class="lnr lnr-arrow-right"></span></a>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</section>
+			<!-- start footer Area -->
+			{% endblock %}
+			{% block script %}
+{% endblock %}

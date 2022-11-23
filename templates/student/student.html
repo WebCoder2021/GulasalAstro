@@ -1,0 +1,181 @@
+{% extends 'main.html' %}{% load static %}{% block head %}
+<style>
+    .country{
+        padding: 10px 20px;
+    }
+</style>
+{% endblock %}{% block content %}
+        <!-- start banner Area -->
+        <section class="banner-area relative about-banner" id="home">	
+            <div class="overlay overlay-bg"></div>
+            <div class="container">				
+                <div class="row d-flex align-items-center justify-content-center">
+                    <div class="about-content col-lg-12">
+                        <h1 class="text-white">
+                            O'quvchilar haqida
+                        </h1>
+                        <p class="text-white link-nav"><a href="{% url 'home' %}">Bosh sahifa </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{% url 'student_page' %}"> O'quvchilar haqida</a></p>
+                    </div>	
+                </div>
+            </div>
+        </section>
+        <!-- End banner Area -->	
+
+        <!-- Start course-details Area -->
+        <section class="course-details-area pt-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 left-contents">
+                        <div class="main-image">
+                            <img class="img-fluid" src="img/m-img.jpg" alt="">
+                        </div>
+                        <div class="jq-tab-wrapper" id="horizontalTab">
+                            <div class="jq-tab-menu">
+                                <div class="jq-tab-title active" data-tab="1">Umumiy ma'lumotlar</div>
+                                <div class="jq-tab-title" data-tab="2"> Dars jadvali</div>
+                                <div class="jq-tab-title" data-tab="3">Davomat</div>
+                            </div>
+                            <div class="jq-tab-content-wrapper">
+                                <div class="jq-tab-content active" data-tab="1">
+                                    <div class="col-lg-12 right-contents">
+                                       <img src="{{request.user.picture.url}}" alt=""> 
+                                        <ul>
+                                            <li>
+                                                <a class="justify-content-between d-flex" href="#">
+                                                    <p>Familiya</p>
+                                                    <span class="or">{{student.user.last_name}}</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="justify-content-between d-flex" href="#">
+                                                    <p>Ism </p>
+                                                    <span>{{request.user.first_name}}</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="justify-content-between d-flex" href="#">
+                                                    <p>Sharif </p>
+                                                    <span>{{request.user.middle_name}}</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="justify-content-between d-flex" href="#">
+                                                    <p>Email </p>
+                                                    <span>{{request.user.email}}</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="justify-content-between d-flex" href="#">
+                                                    <p>Manzil </p>
+                                                    <span>{{request.user.location}}</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="justify-content-between d-flex" href="#">
+                                                    <p>Ota-ona telefon raqami </p>
+                                                    <span>{{student.parent_phone}}</span>
+                                                </a>
+                                            </li>
+                                            <div class="typo-sec">
+                                                <h4 class="mb-20" >Yozilgan kurslar</h4>
+                                                 <ul class="unordered-list">
+                                                {% for cr in student.courses.all %}
+                                                    <li>{{cr.course.name}} | <b>Guruh:</b>  {{cr.name}} </li>
+                                                {% endfor %}
+                                            </ul>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="jq-tab-content" data-tab="2">
+                                    <div class="section-top-border">
+                                        <h3 class="mb-30">Siz bizning quyidagi kurslarda o'qiysiz</h3>
+                                        <div class="progress-table-wrap">
+                                            <div class="progress-table ">
+                                                <div class="table-head p-20">
+                                                    <div class="country">Kurs nomi</div>
+                                                    <div class="country">Guruh</div>
+                                                    <div class="country">Hafta kuni va vaqt</div>
+                                                </div>
+                                                {% for group in student.courses.all %}
+                                                <div class="table-row">
+                                                    <div class="country">{{group.course.name}}</div>
+                                                    <div class="country">{{group.name}}</div>
+                                                    <div class="country">{% for sc in group.course.schedule.all %} {{sc.week.name}}-{{sc.time}} <br> {% empty %} Hali boshlanmabdi {% endfor %}</div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="jq-tab-content" data-tab="3">
+                                    <div class="section-top-border">
+                                        <h3 class="mb-30">Siz darsda kelmagan kunlar</h3>
+                                        <div class="progress-table-wrap">
+                                            <div class="progress-table">
+                                                <div class="table-head">
+                                                    <div class="country">Kurs</div>
+                                                    <div class="country">Guruh</div>
+                                                    <div class="country">Sana</div>
+                                                </div>{% for q in student.student_attendance.days.all %}
+                                                <div class="table-row">
+                                                    <div class="country">{{q.group.course.name}}</div>
+                                                    <div class="country"> {{q.group.name}}</div>
+                                                    <div class="country">{{q.date_time|date:'d-m-Y H:i'}}</div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>	
+        </section>
+        <!-- End course-details Area -->
+        
+
+        <!-- Start popular-courses Area --> 
+        <section class="popular-courses-area section-gap courses-page">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="menu-content pb-70 col-lg-8">
+                        <div class="title text-center">
+                            <h1 class="mb-10">Biz taklif qiladigan mashhur kurslar</h1>
+                            <p>Agar siz hayotdagi maqsadingizni aniqlamagan bo'lsangiz, unda siz unga ega bo'lgan odam uchun ishlaysiz</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for course in courses %}
+                    <div class="single-popular-carusel col-lg-3 col-md-6">
+                        <div class="thumb-wrap relative">
+                            <div class="thumb relative">
+                                <div class="overlay overlay-bg"></div>	
+                                <img class="img-fluid" src="{{course.image.url}}" alt="">
+                            </div>
+                            <div class="meta d-flex justify-content-between">
+                                <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>{{course.comments.count}}</p>
+                                <h4>{{course.sale}}</h4>
+                            </div>
+                        </div>
+                        <div class="details">
+                            <a href="{% url 'course_detail' course.slug %}">
+                                <h4>
+                                    {{course.name}}
+                                </h4>
+                            </a>
+                            <p>{{course.sub_title}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div style="display: flex; justify-content:center"><a href="{% url 'courses' %}" class="primary-btn text-uppercase mx-auto">Barcha kurslarni ko'rish</a></div>
+            </div>	
+        </section>
+        <!-- End popular-courses Area -->
+
+{% endblock %}
